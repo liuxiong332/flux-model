@@ -1,17 +1,13 @@
 import ArrayRecordReducer from '../lib/ArrayRecordReducer';
 import { expect } from 'chai';
 
-describe.only('ArrayRecordReducer', function () {
+describe('ArrayRecordReducer', function () {
   it('contains reducer array', function () {
     class TypeA extends ArrayRecordReducer {}
     class TypeB extends ArrayRecordReducer {
       constructor() {
         super(...arguments);
-        this.forEach((reducer, index) => {
-          this.addDisposable(reducer.subscribe((newRd) => {
-            this.trigger(this.set(index, newRd));
-          }));
-        });
+        this.monitorAllChildren();
       }
 
       pushReducer(reducer) {
