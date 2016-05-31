@@ -1,5 +1,7 @@
 var spawn = require('child_process').spawn;
 var path = require('path');
+var gulp = require('gulp');
+var babel = require('gulp-babel');
 
 function runNodeCmd(cmdName, args, callback) {
   if (!Array.isArray(args)) {
@@ -15,6 +17,10 @@ function runNodeCmd(cmdName, args, callback) {
   task.on('exit', function() { callback(); });
 }
 
-gulp.task('compile', function(done) {
-  runNodeCmd('tsc', done);
+gulp.task('build', function () {
+  return gulp.src('lib/*.js')
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('dist'));
 });
