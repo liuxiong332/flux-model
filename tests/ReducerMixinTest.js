@@ -3,7 +3,7 @@ import { expect } from 'chai';
 
 class Base {}
 
-describe.only('ReducerMixin', function () {
+describe('ReducerMixin', function () {
   it('addDisposable', function () {
     var MyType = ReducerMixin(Base);
 
