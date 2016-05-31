@@ -81,6 +81,7 @@ describe('Record', () => {
     expect(t.toObject()).to.eql({a:10, b:20, c:3})
   })
 
+
   it('skips unknown keys', function () {
     var MyType = Record({a:1, b:2});
     var seq = Seq({b:20, c:30});
@@ -111,4 +112,17 @@ describe('Record', () => {
     expect(t4).not.to.equal(t2);
   })
 
+  it('invoke the subclass constructor', function () {
+    var isInvoked = false;
+    var MyType = class extends Record({a:1, b: 2}) {
+      constructor() {
+        super(...arguments);
+        isInvoked = true;
+      }
+    };
+    var t1 = new MyType();
+    var t2 = t1.set('a', 3);
+    expect(t2 instanceof MyType).to.true;
+    expect(isInvoked).to.true;
+  })
 });
