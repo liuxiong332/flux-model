@@ -21,17 +21,14 @@ var ReducerMixin = function ReducerMixin(Record) {
     function _class() {
       _classCallCheck(this, _class);
 
-      return _possibleConstructorReturn(this, Object.getPrototypeOf(_class).apply(this, arguments));
+      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).apply(this, arguments));
+
+      _this._subscriptions = new _eventKit.CompositeDisposable();
+      _this._subscribers = [];
+      return _this;
     }
 
     _createClass(_class, [{
-      key: 'initialize',
-      value: function initialize() {
-        this._subscriptions = new _eventKit.CompositeDisposable();
-        this._subscribers = [];
-        return this;
-      }
-    }, {
       key: 'addDisposable',
       value: function addDisposable(disposable) {
         this._subscriptions.add(disposable);
@@ -52,7 +49,6 @@ var ReducerMixin = function ReducerMixin(Record) {
             index !== -1 && subscribers.splice(index, 1);
           }
         };
-        this._subscriptions.add(disposable);
         return disposable;
       }
     }, {
@@ -60,7 +56,6 @@ var ReducerMixin = function ReducerMixin(Record) {
       value: function trigger(newInstance) {
         if (newInstance === this) return;
         this.dispose();
-        newInstance.initialize();
         var subscribers = this._subscribers;
         var length = subscribers.length;
         for (var i = 0; i < length; ++i) {

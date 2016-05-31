@@ -1,7 +1,6 @@
 var spawn = require('child_process').spawn;
 var path = require('path');
 var gulp = require('gulp');
-var babel = require('gulp-babel');
 var mocha = require('gulp-mocha');
 require("babel-register");
 

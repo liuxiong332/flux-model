@@ -2,7 +2,7 @@ import { Seq, Map } from 'immutable';
 import ArrayRecord from '../lib/ArrayRecord';
 import { expect } from 'chai';
 
-describe.only('ArrayRecord', () => {
+describe('ArrayRecord', () => {
 
   it('defines a constructor', function () {
     var t1 = ArrayRecord([1, 2, 3]);

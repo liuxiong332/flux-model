@@ -20,5 +20,8 @@
   },
   "peerDependencies": {
     "immutable": ">=3"
+  },
+  "dependencies": {
+    "event-kit": "^2.0.0"
   }
 }
