@@ -9,6 +9,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^1.8.10"
+    "immutable": "^3.8.1",
+    "typescript": "^1.8.10",
+    "typings": "^1.0.4"
+  },
+  "peerDependencies": {
+    "immutable": ">=3"
   }
 }
