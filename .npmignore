@@ -1,0 +1,8 @@
+tests
+lib
+node_modules
+.babelrc
+.gitignore
+.travis.yml
+CHANGELOG.md
+gulpfile.js
