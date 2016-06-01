@@ -1,13 +1,22 @@
 {
-  "name": "flux-model",
-  "version": "1.0.0",
-  "description": "The flux-like data flow container.",
-  "main": "index.js",
+  "name": "flux-reducer",
+  "version": "0.1.0",
+  "description": "The flux-like data flow library.",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "babel lib -d dist",
-    "test": "gulp test"
+    "test": "gulp test",
+    "prepublish": "npm run build"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "liuxiong332/flux-reducer"
+  },
+  "keywords": [
+    "flux",
+    "react"
+  ],
+  "author": "liuxiong332",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.9.0",
