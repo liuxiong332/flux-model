@@ -2,12 +2,25 @@ import ArrayRecordReducer from '../lib/ArrayRecordReducer';
 import { expect } from 'chai';
 
 describe('ArrayRecordReducer', function () {
+  it('set the initial state', function () {
+    class TypeA extends ArrayRecordReducer {
+      constructor(values) {
+        super(values || [1, 2, 3]);
+      }
+    }
+
+    var t = new TypeA();
+    expect(t.toJS()).to.eql([1, 2, 3]);
+    var t2 = t.push(4);
+    expect(t2.toJS()).to.eql([1, 2, 3, 4]);
+  })
+
   it('contains reducer array', function () {
     class TypeA extends ArrayRecordReducer {}
     class TypeB extends ArrayRecordReducer {
       constructor() {
         super(...arguments);
-        this.monitorAllChildren();
+        this.monitorAllValues();
       }
 
       pushReducer(reducer) {
