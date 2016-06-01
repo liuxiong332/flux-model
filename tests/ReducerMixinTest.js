@@ -35,4 +35,17 @@ describe('ReducerMixin', function () {
     t.trigger('change');
     expect(hasInvoked).to.false;
   })
+
+  it('initWithCallback', function () {
+    var MyType = ReducerMixin(Base);
+
+    var t1 = new MyType;
+    t1.initWithCallback((t) => {
+      t.hasInit = true;
+    });
+    var t2 = new MyType;
+    t1.trigger(t2);
+    expect(t1.hasInit).to.true;
+    expect(t2.hasInit).to.true;
+  })
 });
