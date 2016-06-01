@@ -1,6 +1,6 @@
 {
   "name": "flux-reducer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The flux-like data flow library.",
   "main": "./dist/index.js",
   "scripts": {
