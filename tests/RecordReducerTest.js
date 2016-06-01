@@ -3,15 +3,11 @@ import { expect } from 'chai';
 
 describe('RecordReducer', function () {
   it('contains one reducer', function () {
-    class TypeA extends RecordReducer {
-      constructor(values) {
-        super(values || {a: 1});
-      }
-    }
-    class TypeB extends RecordReducer {
-      constructor(values) {
-        super(values || {valueA: new TypeA});
-        var disposable = this.get('valueA').subscribe((reducer) => {
+    class TypeA extends RecordReducer({a: 1}) {}
+    class TypeB extends RecordReducer({valueA: new TypeA}) {
+      constructor() {
+        super(...arguments);
+        var disposable = this.valueA.subscribe((reducer) => {
           this.trigger(this.set('valueA', reducer));
         });
         this.addDisposable(disposable);
@@ -35,17 +31,13 @@ describe('RecordReducer', function () {
   })
 
   it('contains many reducers', function () {
-    class TypeA extends RecordReducer {
-      constructor(values) {
-        super(values || {a: 1});
-      }
-    }
-    class TypeB extends RecordReducer {
-      constructor(values) {
-        super(values || {
-          valueA: new TypeA,
-          valueB: new TypeA,
-        });
+    class TypeA extends RecordReducer({a: 1}) {}
+    class TypeB extends RecordReducer({
+      valueA: new TypeA,
+      valueB: new TypeA,
+    }) {
+      constructor() {
+        super(...arguments);
         this.addDisposable(this.valueA.subscribe((reducer) => {
           this.trigger(this.set('valueA', reducer));
         }));
