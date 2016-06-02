@@ -48,4 +48,17 @@ describe('ReducerMixin', function () {
     expect(t1.hasInit).to.true;
     expect(t2.hasInit).to.true;
   })
+
+  it('dispose subscriber in trigger', function () {
+    var MyType = ReducerMixin(Base);
+
+    var t1 = new MyType;
+    var disposable1 = t1.subscribe(() => {
+      disposable1.dispose();
+    });
+    var disposable2 = t1.subscribe(() => {
+      disposable2.dispose();
+    });
+    t1.trigger(1);
+  })
 });
