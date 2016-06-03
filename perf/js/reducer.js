@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import { Reducer } from 'flux-reducer';
 import { Record } from 'immutable';
 import { generateObj, generateObjWithFn } from './helper';
@@ -35,7 +34,7 @@ function oneRoute() {
 }
 
 var t0 = performance.now();
-for (let i = 0; i < 100; ++i) {
+for (let i = 0; i < 10; ++i) {
   oneRoute();
 }
 var t1 = performance.now();
