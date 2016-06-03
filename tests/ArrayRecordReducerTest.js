@@ -33,12 +33,16 @@ describe('ArrayRecordReducer', function () {
     var b1 = new TypeB;
     var a1 = new TypeA;
     var b2 = b1.pushReducer(a1);
+    expect(b1._subscriptions.disposed).to.true;
+
     expect(a1._subscribers.length).to.equal(1);
+    expect(b2.get(0)).to.be.equal(a1);
 
     var a2 = a1.push('dd');
     a1.trigger(a2);
+    expect(a1._subscriptions.disposed).to.true;
     expect(b2._subscriptions.disposed).to.true;
-    expect(a1._subscribers.length).to.equal(0);
+    expect(a1._subscribers).to.be.null;
     expect(a2._subscribers.length).to.equal(1);
   })
 });

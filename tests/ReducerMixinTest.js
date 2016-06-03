@@ -27,13 +27,10 @@ describe('ReducerMixin', function () {
     var hasInvoked = false;
     var disposable = t.subscribe(() => { hasInvoked = true; });
 
-    t.trigger('change');
+    var t2 = new MyType;
+    t.trigger(t2);
     expect(hasInvoked).to.true;
-
-    hasInvoked = false;
     disposable.dispose();
-    t.trigger('change');
-    expect(hasInvoked).to.false;
   })
 
   it('initWithCallback', function () {
@@ -59,6 +56,6 @@ describe('ReducerMixin', function () {
     var disposable2 = t1.subscribe(() => {
       disposable2.dispose();
     });
-    t1.trigger(1);
+    t1.trigger(new MyType);
   })
 });

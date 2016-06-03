@@ -1,4 +1,4 @@
-import { generateObj, generateObjWithFn } from './helper';
+import { generateObj, generateObjWithConstructor } from './helper';
 
 class Object0 {
   constructor() {
@@ -8,7 +8,7 @@ class Object0 {
 
 let SubObject = (Base) => class {
   constructor() {
-    return generateObjWithFn(Base);
+    return generateObjWithConstructor(Base);
   }
 }
 
@@ -35,7 +35,7 @@ function oneRoute() {
 }
 
 var t0 = performance.now();
-for (let i = 0; i < 10; ++i) {
+for (let i = 0; i < 1; ++i) {
   oneRoute();
 }
 var t1 = performance.now();

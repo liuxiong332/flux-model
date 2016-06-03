@@ -14,6 +14,14 @@ export function generateObj(initVal) {
 export function generateObjWithFn(fn) {
   let obj = {};
   properties.forEach((key) => {
+    obj[key] = fn();
+  });
+  return obj;
+}
+
+export function generateObjWithConstructor(fn) {
+  let obj = {};
+  properties.forEach((key) => {
     obj[key] = new fn();
   });
   return obj;

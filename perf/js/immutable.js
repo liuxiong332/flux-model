@@ -1,11 +1,11 @@
 import { Record } from 'immutable';
-import { generateObj, generateObjWithFn } from './helper';
+import { generateObj, generateObjWithConstructor } from './helper';
 
 class Record0 extends Record(generateObj('')) {};
 
 let SubRecord = (Base) => class extends Record(generateObj('')) {
   constructor(values) {
-    super(values || generateObjWithFn(Base));
+    super(values || generateObjWithConstructor(Base));
   }
 };
 
@@ -32,7 +32,7 @@ function oneRoute() {
 }
 
 var t0 = performance.now();
-for (let i = 0; i < 10; ++i) {
+for (let i = 0; i < 1; ++i) {
   oneRoute();
 }
 var t1 = performance.now();

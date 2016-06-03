@@ -2,14 +2,23 @@ import { Reducer } from 'flux-reducer';
 import { Record } from 'immutable';
 import { generateObj, generateObjWithFn } from './helper';
 
-class Reducer0 extends Reducer(generateObj('')) {};
-
-let SubReducer = (Base) => class extends Reducer(generateObj('')) {
-  constructor(values) {
-    super(values || generateObjWithFn(Base));
-    this.monitorAllValues();
+class Reducer0 extends Reducer(generateObj('')) {
+  static create() {
+    return new Reducer0();
   }
 };
+
+let SubReducer = (Base) => {
+  let SubClass = class extends Reducer(generateObj('')) {
+    static create() {
+      let reducer = new SubClass(generateObjWithFn(Base.create));
+      reducer.initOnce();
+      reducer.monitorAllValues();
+      return reducer;
+    }
+  };
+  return SubClass;
+}
 
 let Reducer1 = SubReducer(Reducer0);
 let Reducer2 = SubReducer(Reducer1);
@@ -22,7 +31,7 @@ let Reducer8 = SubReducer(Reducer7);
 let Reducer9 = SubReducer(Reducer8);
 
 function oneRoute() {
-  let reducer4 = new Reducer4;
+  let reducer4 = Reducer4.create();
   let subscription = reducer4.subscribe(reducerHandler);
 
   function reducerHandler(newRd) {
@@ -34,7 +43,7 @@ function oneRoute() {
 }
 
 var t0 = performance.now();
-for (let i = 0; i < 10; ++i) {
+for (let i = 0; i < 1; ++i) {
   oneRoute();
 }
 var t1 = performance.now();

@@ -32,14 +32,11 @@ describe('RecordReducer', function () {
     expect(a1._subscribers.length).to.equal(1);
 
     var b2 = null;
-    b1.subscribe((newB) => {
-      b2 = newB;
-    });
+    b1.subscribe((newB) => { b2 = newB; });
     var a2 = b1.valueA.set('a', 2);
     b1.valueA.trigger(a2);
-    expect(a1._subscribers.length).to.eql(0);
+    expect(a1._subscribers).to.be.null;
     expect(b1._subscriptions.disposed).to.true;
-
     expect(a2._subscribers.length).to.eql(1);
   })
 
@@ -66,7 +63,7 @@ describe('RecordReducer', function () {
     expect(a2._subscribers.length).to.equal(1);
 
     a1.trigger(a1.set('a', 2));
-    expect(a1._subscribers.length).to.equal(0);
+    expect(a1._subscribers).to.be.null;
     expect(a2._subscribers.length).to.equal(1);
   })
 
@@ -76,23 +73,25 @@ describe('RecordReducer', function () {
       valueA: new TypeA,
       valueB: new TypeA,
     }) {
-      constructor() {
-        super(...arguments);
-        this.monitorAllValues();
+      static create() {
+        let reducer = new TypeB;
+        reducer.initOnce();
+        reducer.monitorAllValues();
+        return reducer;
       }
     }
-    var b1 = new TypeB;
+    var b1 = TypeB.create();
     var a1 = b1.valueA;
     var a2 = b1.valueB;
     expect(a1._subscribers.length).to.equal(1);
     expect(a2._subscribers.length).to.equal(1);
 
     a1.trigger(a1.set('a', 2));
-    expect(a1._subscribers.length).to.equal(0);
+    expect(a1._subscribers).to.be.null;
     expect(a2._subscribers.length).to.equal(1);
 
     a2.trigger(a2.set('a', 3));
-    expect(a2._subscribers.length).to.equal(0);
+    expect(a2._subscribers).to.be.null;
   })
 
   it('monitorValues', function () {
